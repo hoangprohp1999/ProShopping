@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
         User user = modelMapper.map(userRequestDTO, User.class);
 
         //role user
-        Role roleUser = roleRepository.findRoleByName(URole.ROLE_ADMIN.toString());
+        Role roleUser = roleRepository.findRoleByName(URole.ROLE_USER.toString());
         user.setRole(new ArrayList<>() {{
             add(roleUser);
         }});

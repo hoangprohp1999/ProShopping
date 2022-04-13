@@ -23,8 +23,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public static final String SECRET_KEY = "secret-key";
-    public static final int ACCESS_TOKEN_EXPIRED_TIME = 10 * 60 * 1000;
-    public static final int REFRESH_TOKEN_EXPIRED_TIME = 60 * 60 * 1000;
 
     private final UserDetailsService userDetailsService;
 
@@ -60,14 +58,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/login").permitAll();
         http.authorizeRequests().antMatchers("/auth/**").permitAll();
         //product API
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/product/get/**").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/product/show-product/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/product/add-product/**").hasAnyAuthority("ROLE_ADMIN");
-        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/product/manage/**").hasAnyAuthority("ROLE_ADMIN");
-        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/product/manage/**").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/product/edit-product/**").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/product/delete-product/**").hasAnyAuthority("ROLE_ADMIN");
         //user API
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/user/get/get-all-users/**").hasAnyAuthority("ROLE_ADMIN");
-        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/user/manage/**").hasAnyAuthority("ROLE_ADMIN");
-
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/user/show-user/**").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/user/search-user/**").hasAnyAuthority("ROLE_USER");
+        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/user/edit-user/**").hasAnyAuthority("ROLE_USER");
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/user/delete-user/**").hasAnyAuthority("ROLE_ADMIN");
+        //cart API
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/cart/show-cart/**").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/cart/add-cart/**").hasAnyAuthority("ROLE_USER");
+        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/cart/edit-cart/**").hasAnyAuthority("ROLE_USER");
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/cart/delete-cart/**").hasAnyAuthority("ROLE_USER");
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/cart/reset-cart/**").hasAnyAuthority("ROLE_USER");
+        //invoice API
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/invoice/show-invoice/**").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/invoice/add-invoice/**").hasAnyAuthority("ROLE_USER");
+        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/invoice/edit-invoice/**").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/invoice/delete-invoice/**").hasAnyAuthority("ROLE_ADMIN");
+        //rating API
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/rating/show-rating/**").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/rating/add-rating/**").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/rating/edit-rating/**").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/rating/delete-rating/**").permitAll();
         //authenticated other requests
         http.authorizeRequests().anyRequest().authenticated();
         //permit other requests
