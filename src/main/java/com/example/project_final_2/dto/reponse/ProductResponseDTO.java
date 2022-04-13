@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class ProductResponseDTO {
 
     private long id;
-    private int availiableQuantity;
+    private int availableQuantity;
     private String manufacturedFactory;
     private int maxQuantity;
     private String productName;

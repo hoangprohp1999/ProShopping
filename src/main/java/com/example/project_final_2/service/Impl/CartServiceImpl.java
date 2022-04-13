@@ -46,7 +46,7 @@ public class CartServiceImpl implements CartService {
 
         Product product = productRepository.findById(cartItemRequestDTO.getProductId()).orElseThrow(()-> new IllegalStateException("Not Found"));
 
-        long availableQuantityAfterCreateInvoice = product.getAvailableQuantity() - cartItemRequestDTO.getNumberItem();
+        int availableQuantityAfterCreateInvoice = product.getAvailableQuantity() - cartItemRequestDTO.getNumberItem();
 
         if (availableQuantityAfterCreateInvoice < 0) throw new BusinessException("Create cart fail");
 

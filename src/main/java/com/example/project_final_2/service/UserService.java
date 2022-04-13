@@ -8,20 +8,22 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    public List<UserResponseDTO> getAllUser(int pageIndex, int pageSize);
+    List<UserResponseDTO> getAllUser(int pageIndex, int pageSize);
 
-    public Optional<User> findUserByID(Long id);
+    Optional<User> findUserByID(Long id);
 
-    public UserResponseDTO getUserDTOByID(String username);
+    UserResponseDTO getUserDTOByID(String username);
 
-    public UserResponseDTO getUserDTOByUsername(String username);
+    UserResponseDTO getUserDTOByUsername(String username);
 
-    public List<UserResponseDTO> getListUserByFilter(UserRequestDTO filter, int page, int limit);
+    List<UserResponseDTO> getListUserByFilter(UserRequestDTO filter, int page, int limit);
 
-    public void saveNewUser(UserRequestDTO userRequestDTO);
+    void saveNewUser(UserRequestDTO userRequestDTO);
 
-    public void editUserInfo(String username, UserRequestDTO userRequestDTO) throws Exception;
+    void editUserInfo(String username, UserRequestDTO userRequestDTO) throws Exception;
 
-    public void deleteUserByID(Long id);
+    void deleteUserByID(Long id);
+
+    User checkExistsUserByUsername(String username);
 
 }

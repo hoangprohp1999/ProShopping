@@ -133,4 +133,10 @@ public class UserServiceImpl implements UserService {
     public List<UserResponseDTO> convertAllToDTO(List<User> users) {
         return users.stream().map(t -> convertToDTO(t)).collect(Collectors.toList());
     }
+
+    @Override
+    public User checkExistsUserByUsername(String username) {
+        Optional<User> user = userRepository.findByEmail(username);
+        return user.isPresent() ? userRepository.findUserByEmail(username) : null;
+    }
 }

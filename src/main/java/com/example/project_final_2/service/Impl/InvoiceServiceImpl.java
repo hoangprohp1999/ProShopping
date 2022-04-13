@@ -11,6 +11,7 @@ import com.example.project_final_2.entity.user.User;
 import com.example.project_final_2.exception.BusinessException;
 import com.example.project_final_2.exception.CanNotSaveToDatabaseException;
 import com.example.project_final_2.exception.NotFoundEntityException;
+import com.example.project_final_2.exception.NotFoundException;
 import com.example.project_final_2.repository.CartRepository;
 import com.example.project_final_2.repository.InvoiceRepository;
 import com.example.project_final_2.repository.ProductRepository;
@@ -74,8 +75,15 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public void createInvoice(String username, InvoiceRequestDTO request) throws Exception {
         try {
-            Invoice invoice = getNewInvoiceFromDTO(username, request);
-            invoiceRepository.save(invoice);
+            User user = userRepository.findByEmail(username)
+                    .orElseThrow(() -> new NotFoundEntityException("User not found"));
+            if(user.getVerified() == true){
+                Invoice invoice = getNewInvoiceFromDTO(username, request);
+                invoiceRepository.save(invoice);
+            }
+            else{
+                throw new NotFoundException("Not found");
+            }
         } catch (RuntimeException e) {
             e.printStackTrace();
             throw new CanNotSaveToDatabaseException(descriptionOf("Cannot save"));
@@ -102,7 +110,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             Product product = productRepository.findById(cartItem.getProduct().getId())
                     .orElseThrow(() -> new NotFoundEntityException("Product in cart not found"));
 
-            long availableQuantityAfterCreateInvoice = product.getAvailableQuantity() - cartItem.getNumberItem();
+            int availableQuantityAfterCreateInvoice = product.getAvailableQuantity() - cartItem.getNumberItem();
 
             if (availableQuantityAfterCreateInvoice < 0) throw new BusinessException("Create invoice fail");
 

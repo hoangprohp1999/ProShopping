@@ -32,9 +32,9 @@ public class CartItem {
     private Product product;
 
     @Column(name = "numberItem")
-    private long numberItem;
+    private int numberItem;
 
-    public CartItem(User user, Product product, long numberItem) {
+    public CartItem(User user, Product product, int numberItem) {
         this.userProductKey = new UserProductKey(user.getId(),product.getId());
         this.user = user;
         this.product = product;

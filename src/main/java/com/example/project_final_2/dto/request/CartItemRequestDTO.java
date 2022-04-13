@@ -16,5 +16,5 @@ public class CartItemRequestDTO {
     private Long productId;
 
     @Positive
-    private long numberItem;
+    private int numberItem;
 }

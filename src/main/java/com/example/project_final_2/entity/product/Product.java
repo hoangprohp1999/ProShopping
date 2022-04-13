@@ -28,8 +28,8 @@ public class Product{
     @Column(name = "productId")
     private long id;
 
-    @Column(name = "instock")
-    private long availableQuantity;
+    @Column(name = "availableQuantity")
+    private int availableQuantity;
 
     @Column(name = "manufacturedFactory")
     private String manufacturedFactory;

@@ -16,7 +16,7 @@ public class ProductRequestDTO {
     private String productName;
     private int price;
     private int maxQuantity;
-    private int availiableQuantity;
+    private int availableQuantity;
     private String manufacturedFactory;
     private String origin;
     private float ratingScore;

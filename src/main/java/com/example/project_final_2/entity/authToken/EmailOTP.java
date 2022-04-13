@@ -24,21 +24,16 @@ public class EmailOTP implements Serializable {
     private Long id;
 
     @OneToOne
-    @MapsId
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "userId")
     private User user;
 
     @Column(name = "otp_code")
-    private int otpCode;
+    private String otpCode;
 
-    @Column(name = "expiry_time")
-    private Instant expiryTime;
-
-    public EmailOTP(User user) {
+    public EmailOTP(User user, String otpCode) {
         this.id = user.getId();
-        this.otpCode = random.nextInt(900000) + 100000;
+        this.otpCode = otpCode;
     }
 
-    public static Random random = new Random();
 }
 

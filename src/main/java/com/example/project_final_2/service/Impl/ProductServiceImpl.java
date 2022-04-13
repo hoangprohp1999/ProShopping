@@ -48,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(id).orElseThrow(()-> new IllegalStateException("Empty")) ;
 
         product.setProductName(productRequestDTO.getProductName());
-        product.setAvailableQuantity(productRequestDTO.getAvailiableQuantity());
+        product.setAvailableQuantity(productRequestDTO.getAvailableQuantity());
         product.setManufacturedFactory(productRequestDTO.getManufacturedFactory());
         product.setMaxQuantity(productRequestDTO.getMaxQuantity());
         product.setPrice(productRequestDTO.getPrice());

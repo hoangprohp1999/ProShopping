@@ -33,12 +33,12 @@ public class InvoiceItems implements Serializable {
     private Product product;
 
     @Column(name = "number_item")
-    private long numberItem;
+    private int numberItem;
 
     @Column(name = "price")
     private long money;
 
-    public InvoiceItems(Invoice invoice, Product item, long numberItem, long money) {
+    public InvoiceItems(Invoice invoice, Product item, int numberItem, long money) {
         this.invoiceItemID = new InvoiceItemID(invoice.getId(), item.getId());
         this.invoice = invoice;
         this.product = item;
