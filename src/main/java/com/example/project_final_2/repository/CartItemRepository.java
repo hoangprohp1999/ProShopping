@@ -13,5 +13,4 @@ public interface CartItemRepository extends JpaRepository<CartItem, UserProductK
     @Transactional
     void deleteAllByUser(User user);
 
-
 }

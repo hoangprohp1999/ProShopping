@@ -17,7 +17,7 @@ public class UserRequestDTO {
     private String fullName;
 
     @NotNull
-    private Date dOB;
+    private Date dob;
 
     @NotNull
     private String gender;

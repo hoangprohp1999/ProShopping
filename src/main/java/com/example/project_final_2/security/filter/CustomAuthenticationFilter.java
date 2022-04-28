@@ -42,10 +42,12 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 //        String phone = request.getParameter("phone");
         System.out.println(username);
         System.out.println(password);
+        //lấy username và password từ client về
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
         return authenticationManager.authenticate(token);
     }
 
+    //so sánh mà giống thì nhảy xuống hàm này
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
         User user = (User) authentication.getPrincipal();

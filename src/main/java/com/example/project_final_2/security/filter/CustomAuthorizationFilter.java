@@ -29,6 +29,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         if (request.getServletPath().equals("/login")) {
+            //dùng để pass qua filter này, nếu không có hàm này thì sẽ ko thể chuyển qua service khác được
             filterChain.doFilter(request, response);
         }else {
             String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);

@@ -20,9 +20,13 @@ public class AuthController {
     }
 
     @PostMapping("/sign-up")
-    public ResponseEntity signUp(@RequestBody UserRequestDTO userRequestDTO) throws InvalidInputDataException {
-        authService.signUp(userRequestDTO);
-        return new ResponseEntity(new SuccessResponse("Register successfully! Check email to verify your account."), HttpStatus.OK);
+    public ResponseEntity signUp(@RequestBody UserRequestDTO userRequestDTO) {
+        try {authService.signUp(userRequestDTO);
+            return new ResponseEntity(new SuccessResponse("Register successfully! Check email to verify your account."), HttpStatus.OK);}
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @PostMapping("/verify")

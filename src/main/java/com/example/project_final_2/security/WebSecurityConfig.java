@@ -44,6 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //dùng để bcrypt password từ client gửi xuống vầ so sánh với ở DB
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 

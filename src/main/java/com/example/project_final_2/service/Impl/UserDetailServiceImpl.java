@@ -22,6 +22,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
                                  ) {
         this.userRepository = userRepository;
     }
+    // lấy dữ liệu từ DB lên
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findUserByEmail(username);

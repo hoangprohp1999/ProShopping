@@ -32,7 +32,8 @@ public class CartServiceImpl implements CartService {
 
     private final ModelMapper modelMapper;
 
-    public CartServiceImpl(CartItemRepository cartItemRepository, ProductRepository productRepository, UserRepository userRepository, ModelMapper modelMapper) {
+    public CartServiceImpl(CartItemRepository cartItemRepository, ProductRepository productRepository
+            , UserRepository userRepository, ModelMapper modelMapper) {
         this.cartItemRepository = cartItemRepository;
         this.productRepository = productRepository;
         this.userRepository = userRepository;
@@ -44,7 +45,8 @@ public class CartServiceImpl implements CartService {
 
         User user = userRepository.findByEmail(username).orElseThrow(()->new IllegalStateException("Empty"));
 
-        Product product = productRepository.findById(cartItemRequestDTO.getProductId()).orElseThrow(()-> new IllegalStateException("Not Found"));
+        Product product = productRepository.findById(cartItemRequestDTO.getProductId())
+                .orElseThrow(()-> new IllegalStateException("Not Found"));
 
         int availableQuantityAfterCreateInvoice = product.getAvailableQuantity() - cartItemRequestDTO.getNumberItem();
 
@@ -60,7 +62,8 @@ public class CartServiceImpl implements CartService {
     public void editItemToCart(String username, CartItemRequestDTO cartItemRequestDTO) {
         User user = userRepository.findByEmail(username).orElseThrow(()->new IllegalStateException("Empty"));
 
-        Product product = productRepository.findById(cartItemRequestDTO.getProductId()).orElseThrow(()-> new IllegalStateException("Not Found"));
+        Product product = productRepository.findById(cartItemRequestDTO.getProductId())
+                .orElseThrow(()-> new IllegalStateException("Not Found"));
 
         long availableQuantity = product.getAvailableQuantity();
 
